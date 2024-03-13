@@ -16,6 +16,5 @@ public:
 	void PreOrder(TreeNode* root);
 	void PostOrder(TreeNode* root);
 	void PrintTree(TreeNode* root);
-	TreeNode* FindMin(TreeNode* node);
 };
 
