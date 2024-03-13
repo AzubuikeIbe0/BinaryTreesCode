@@ -3,6 +3,11 @@
 #include <iostream>
 using namespace std;
 
+Tree::Tree()
+{
+    root = nullptr;
+}
+
 TreeNode* Tree::CreateNode(int val)
 {
     TreeNode* NewNode = new TreeNode();
@@ -33,113 +38,91 @@ TreeNode* Tree::InsertNodePrivate(TreeNode* node, int key) {
 }
 
 
-TreeNode* Tree::DeleteNode(TreeNode* root, int key)
+
+void Tree::InsertNode(int data)
 {
-    if (root == nullptr) {
-        return root;
-    }
-
-    if (root->data > key) {
-        root->left = DeleteNode(root->left, key);
-        return root;
-    }
-    else if (root->data < key) {
-        root->right = DeleteNode(root->right, key);
-        return root;
-    }
-
-    if (root->left == nullptr) {
-        TreeNode* temp = root->right;
-        delete root;
-        return temp;
-    }
-    else if (root->right == nullptr) {
-        TreeNode* temp = root->left;
-        delete root;
-        return temp;
-    }
-    else {
-        TreeNode* parentSuccessor = root;
-
-        // Find successor
-        TreeNode* successor = root->right;
-        while (successor->left != nullptr) {
-            parentSuccessor = successor;
-            successor = successor->left;
-        }
-
-        if (parentSuccessor != root) {
-            parentSuccessor->left = successor->right;
-        }
-        else {
-            parentSuccessor->right = successor->right;
-        }
-
-        root->data = successor->data;
-
-        return successor;
-        return root;
-    }
+    InsertNodePrivate(root, data);
 }
 
 
 
+void Tree::InOrderPrivate(TreeNode* root)
+{
+    if (root == nullptr) {
+        return;
+    }
+
+    InOrderPrivate(root->left);
+    cout << root->data << ", ";
+    InOrderPrivate(root->right);
+ 
+}
 
 
-void Tree::InsertNode(TreeNode* root)
+
+void Tree::InOrder()
+{
+    InOrderPrivate(root);
+}
+
+void Tree::PreOrderPrivate(TreeNode* root)
 {
     if (root == nullptr) {
         return;
     }
 
     cout << root->data << ", ";
-    InsertNode(root->left);
-    InsertNode(root->right);
+    PreOrderPrivate(root->left);
+    PreOrderPrivate(root->right);
+
 }
 
-void Tree::InOrder(TreeNode* root)
+
+
+void Tree::PreOrder()
+{
+    PreOrderPrivate(root);
+}
+
+
+void Tree::PostOrderPrivate(TreeNode* root)
 {
     if (root == nullptr) {
         return;
     }
 
-    InOrder(root->left);
+    PostOrderPrivate(root->left);
+    PostOrderPrivate(root->right);
     cout << root->data << ", ";
-    InOrder(root->right);
+
+ 
 }
 
-void Tree::PreOrder(TreeNode* root)
+
+void Tree::PostOrder()
 {
-    if (root == nullptr) {
-        return;
-    }
-
-    cout << root->data << ", ";
-    PreOrder(root->left);
-    PreOrder(root->right);
+    PostOrderPrivate(root);
 }
 
-void Tree::PostOrder(TreeNode* root)
-{
-    if (root == nullptr) {
-        return;
-    }
-    
-    PostOrder(root->left);
-    PostOrder(root->right);
-    cout << root->data << ", ";
-}
-
-void Tree::PrintTree(TreeNode* root)
+void Tree::PrintTreePrivate(TreeNode* root)
 {
     if (root == nullptr) {
         return;
     }
 
     cout << root->data << ", ";
-    PrintTree(root->left);
-    PrintTree(root->right);
+    PreOrderPrivate(root->left);
+    PreOrderPrivate(root->right);
+
 }
+
+void Tree::PrintTree()
+{
+    PrintTreePrivate(root);
+}
+
+
+
 
 TreeNode* Tree::FindMin(TreeNode* node) {
     while (node->left != nullptr) {
@@ -152,10 +135,10 @@ TreeNode* Tree::FindMin(TreeNode* node) {
 // Delete a node
 
 
-void Tree::DeleteNodePrivate(TreeNode*& node, int value) {
+TreeNode* Tree::DeleteNodePrivate(TreeNode*& node, int value) {
     // Check if the node is null
     if (node == nullptr) {
-        return; // If the node is null, return
+        return nullptr; // If the node is null, return nullptr
     }
 
     // Check if the current node's value matches the value to be deleted
@@ -193,7 +176,13 @@ void Tree::DeleteNodePrivate(TreeNode*& node, int value) {
             DeleteNodePrivate(node->left, value);
         }
     }
+
+    return node; 
 }
 
 
 
+void Tree::DeleteNode(int data)
+{
+    DeleteNodePrivate(root, data);
+}

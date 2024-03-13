@@ -5,7 +5,6 @@
 class TreeNode
 {
 	friend class Tree;
-	friend int main();
 private:
 	int data;
 	TreeNode* left;
