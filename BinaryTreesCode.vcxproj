@@ -127,12 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Tree.h" />
+    <ClInclude Include="BinaryTree.h" />
     <ClInclude Include="TreeNode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Tree.cpp" />
+    <ClCompile Include="BinaryTree.cpp" />
     <ClCompile Include="TreeNode.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

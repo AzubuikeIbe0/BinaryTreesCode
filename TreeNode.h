@@ -1,16 +1,15 @@
 #pragma once
-#include "Tree.h"
+#include "BinaryTree.h"
 
 
 class TreeNode
 {
-	friend class Tree;
-	friend int main();
+	friend class BinaryTree;
 private:
 	int data;
 	TreeNode* left;
 	TreeNode* right;
 public:
-	TreeNode();
+	TreeNode(int val);
 };
 
